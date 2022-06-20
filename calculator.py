@@ -4,83 +4,82 @@
 #          TKINKER
 
 
+from hashlib import new
 from string import hexdigits
 from tkinter import *
 from tkinter import ttk
 from turtle import heading
 
 
-def display_text():
-   global entry
-   string = entry.get()
-   display.configure(text = string)
+def GUI():
+   def display_text():
+      global entry
+      string = entry.get()
+      display.configure(text = string)
 
-window = Tk()
-window.title("Calculator")
+   def button_click(number):
+      current = entry.get()
+      entry.delete(0, END)
+      entry.insert(0, str(current) + str(number))
 
-entry = Entry(window)
-entry.grid(row = 1, column = 1,pady = 5)
+   def button_plus():
+      first_num = entry.get()
+      global f_num 
+      f_num = int(first_num)
+      entry.delete(0, END)
 
-
-display = Label(window)
-display.grid(row=1, column = 0, pady = 5)
-
-show = ttk.Button(window, text = "=", width = 10, command = display_text)
-show.grid(row=1, column = 3, pady = 5)
-
-plus = ttk.Button(window, text = "+", width = 10)                         
-plus.grid(row=2, column = 0, pady = 5)
-
-minus = ttk.Button(window, text = "-", width = 10)                        
-minus.grid(row=3, column = 0, pady = 5)
-
-multi = ttk.Button(window, text = "*", width = 10)                                 
-multi.grid(row=4, column = 0, pady = 5)
-
-divi = ttk.Button(window, text ="/",  width = 10)                                
-divi.grid(row=5, column = 0, pady = 5)
-
-close = ttk.Button(window, text ="Close", width = 10)                                 
-close.grid(row=5, column = 3, pady = 5)
-
-button_1 = ttk.Button(window, text ="1", width = 10)
-button_1.grid(row=2, column = 1, pady = 5)
-
-button_2 = ttk.Button(window, text ="2", width = 10)
-button_2.grid(row=2, column = 2, pady = 5)
-
-button_3 = ttk.Button(window, text ="3", width = 10)
-button_3.grid(row=2, column = 3, pady = 5)
-
-button_4 = ttk.Button(window, text ="4", width = 10)
-button_4.grid(row=3, column = 1, pady = 5)
-
-button_5 = ttk.Button(window, text ="5", width = 10)
-button_5.grid(row=3, column = 2, pady = 5)
-
-button_6 = ttk.Button(window, text ="6", width = 10)
-button_6.grid(row=3, column = 3, pady = 5)
-
-button_7 = ttk.Button(window, text ="7", width = 10)
-button_7.grid(row=4, column = 1, pady = 5)
-
-button_8 = ttk.Button(window, text ="8", width = 10)
-button_8.grid(row=4, column = 2, pady = 5)
-
-button_9 = ttk.Button(window, text ="9", width = 10)
-button_9.grid(row=4, column = 3, pady = 5)
+   def button_result():
+      new_num = entry.get()
+      entry.delete(0, END)
+      entry.insert(0, f_num + int(new_num))
 
 
 
+   window = Tk()
+   window.title("Calculator")
 
+   entry = Entry(window, width=10)
+   display = Label(window)
 
-window.mainloop()
+   show = ttk.Button(window, text = "=", command = button_result)
+   plus = ttk.Button(window, text = "+", command = button_plus)                      
+   minus = ttk.Button(window, text = "-", command = lambda: button_click())                        
+   multi = ttk.Button(window, text = "*", command = lambda: button_click())                                 
+   divi = ttk.Button(window, text ="/", command = lambda: button_click())                                
+   close = ttk.Button(window, text ="Close", command=window.destroy)                                 
 
+   button_1 = ttk.Button(window, text ="1", command = lambda: button_click(1))
+   button_2 = ttk.Button(window, text ="2", command = lambda: button_click(2))
+   button_3 = ttk.Button(window, text ="3", command = lambda: button_click(3))
+   button_4 = ttk.Button(window, text ="4", command = lambda: button_click(4))
+   button_5 = ttk.Button(window, text ="5", command = lambda: button_click(5))
+   button_6 = ttk.Button(window, text ="6", command = lambda: button_click(6))
+   button_7 = ttk.Button(window, text ="7", command = lambda: button_click(7))
+   button_8 = ttk.Button(window, text ="8", command = lambda: button_click(8))
+   button_9 = ttk.Button(window, text ="9", command = lambda: button_click(9))
 
+   display.grid(row=1, column = 0, pady = 5)
+   entry.grid(row = 1, column = 1,pady = 5)
+   show.grid(row=1, column = 3, pady = 5)
+   plus.grid(row=2, column = 0, pady = 5)
+   minus.grid(row=3, column = 0, pady = 5)
+   multi.grid(row=4, column = 0, pady = 5)
+   divi.grid(row=5, column = 0, pady = 5)
+   close.grid(row=5, column = 3, pady = 5)
 
+   button_1.grid(row=2, column = 1, pady = 5)
+   button_2.grid(row=2, column = 2, pady = 5)
+   button_3.grid(row=2, column = 3, pady = 5)
+   button_4.grid(row=3, column = 1, pady = 5)
+   button_5.grid(row=3, column = 2, pady = 5)
+   button_6.grid(row=3, column = 3, pady = 5)
+   button_7.grid(row=4, column = 1, pady = 5)
+   button_8.grid(row=4, column = 2, pady = 5)
+   button_9.grid(row=4, column = 3, pady = 5)
 
+   window.mainloop()
 
-
+GUI()
 
 
 
