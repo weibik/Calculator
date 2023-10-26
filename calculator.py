@@ -67,8 +67,6 @@ def GUI():
          entry.insert(0, f_num * int(new_num))
       if math == "division":
          entry.insert(0, f_num / int(new_num))
-         
-
 
    window = Tk()
    window.title("Calculator")
@@ -76,23 +74,16 @@ def GUI():
    entry = Entry(window, width=10)
    display = Label(window)
 
-   show = ttk.Button(window, text = "=", command = button_result)
-   plus = ttk.Button(window, text = "+", command = button_plus)                      
-   minus = ttk.Button(window, text = "-", command = button_minus)                        
-   multi = ttk.Button(window, text = "*", command = button_multi)                                 
-   divi = ttk.Button(window, text ="/", command = button_divi)                                
-   close = ttk.Button(window, text ="Close", command=window.destroy)                                 
+   show = ttk.Button(window, text="=", command=button_result)
+   plus = ttk.Button(window, text="+", command=button_plus)
+   minus = ttk.Button(window, text="-", command=button_minus)
+   multi = ttk.Button(window, text="*", command=button_multi)
+   divi = ttk.Button(window, text="/", command=button_divi)
+   close = ttk.Button(window, text="Close", command=window.destroy)
 
-   button_1 = ttk.Button(window, text ="1", command = lambda: button_click(1))
-   button_2 = ttk.Button(window, text ="2", command = lambda: button_click(2))
-   button_3 = ttk.Button(window, text ="3", command = lambda: button_click(3))
-   button_4 = ttk.Button(window, text ="4", command = lambda: button_click(4))
-   button_5 = ttk.Button(window, text ="5", command = lambda: button_click(5))
-   button_6 = ttk.Button(window, text ="6", command = lambda: button_click(6))
-   button_7 = ttk.Button(window, text ="7", command = lambda: button_click(7))
-   button_8 = ttk.Button(window, text ="8", command = lambda: button_click(8))
-   button_9 = ttk.Button(window, text ="9", command = lambda: button_click(9))
-   button_0 = ttk.Button(window, text ="0", command = lambda: button_click(0))
+   buttons_list = []
+   for i in range(10):
+      buttons_list.append(ttk.Button(window, text =f"{i}", command = lambda i=i: button_click(i)))
 
    display.grid(row=1, column = 0, pady = 5)
    entry.grid(row = 1, column = 1, columnspan = 2, sticky = W + E, pady = 5)
@@ -103,71 +94,21 @@ def GUI():
    divi.grid(row=5, column = 0, pady = 5)
    close.grid(row=5, column = 1, pady = 5)
 
-   button_1.grid(row=2, column = 1, pady = 5)
-   button_2.grid(row=2, column = 2, pady = 5)
-   button_3.grid(row=2, column = 3, pady = 5)
-   button_4.grid(row=3, column = 1, pady = 5)
-   button_5.grid(row=3, column = 2, pady = 5)
-   button_6.grid(row=3, column = 3, pady = 5)
-   button_7.grid(row=4, column = 1, pady = 5)
-   button_8.grid(row=4, column = 2, pady = 5)
-   button_9.grid(row=4, column = 3, pady = 5)
-   button_0.grid(row=5, column = 2, pady = 5)
+   buttons = [
+      ("1", 2, 1), ("2", 2, 2), ("3", 2, 3),
+      ("4", 3, 1), ("5", 3, 2), ("6", 3, 3),
+      ("7", 4, 1), ("8", 4, 2), ("9", 4, 3),
+      ("0", 5, 2)
+   ]
+   row_num, col_num = 2, 1
+   buttons_list.append(ttk.Button(window, text="0", command=lambda: button_click(0)))
+   for button in buttons_list:
+      button.grid(row=row_num, column=col_num, pady=5)
+      col_num += 1
+      if col_num > 3:
+         col_num = 1
+         row_num += 1
 
    window.mainloop()
 
 GUI()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
